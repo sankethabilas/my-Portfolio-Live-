@@ -15,6 +15,9 @@ const ResumeContent = () => (
       <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-wide text-gray-900 mb-2 text-center md:text-left">Sanketh Abilas</h1>
       <div className="flex flex-col md:flex-row flex-wrap gap-y-2 gap-x-6 text-sm font-medium text-gray-700 justify-center md:justify-start">
         <span className="flex items-center gap-1">
+            <span className="text-gray-900">📍</span> Sri Lanka
+        </span>
+        <span className="flex items-center gap-1">
             <span className="text-gray-900">📞</span> +94 719604194
         </span>
         <span className="flex items-center gap-1">

@@ -658,7 +658,7 @@ export default function Portfolio() {
                     </svg>
                   ), 
                   color: "hover:text-blue-500",
-                  link: "https://www.facebook.com/sanketh.abilas"
+                  link: "https://web.facebook.com/sanketh.abilas.2025/"
                 },
                 { 
                   icon: (
@@ -667,7 +667,7 @@ export default function Portfolio() {
                     </svg>
                   ), 
                   color: "hover:text-red-500",
-                  link: "mailto:sankethabilas@gmail.com"
+                  link: "mailto:sankethmarasingha@gmail.com"
                 },
                 { 
                   icon: (
@@ -676,7 +676,7 @@ export default function Portfolio() {
                     </svg>
                   ), 
                   color: "hover:text-gray-300",
-                  link: "https://github.com/SankethAbilas"
+                  link: "https://github.com/sankethabilas"
                 },
                 { 
                   icon: (
@@ -685,7 +685,7 @@ export default function Portfolio() {
                     </svg>
                   ), 
                   color: "hover:text-blue-400",
-                  link: "https://www.linkedin.com/in/sankethabilas/"
+                  link: "https://www.linkedin.com/in/sanketh-abilas-567569322/"
                 },
                 { 
                   icon: (
@@ -694,7 +694,7 @@ export default function Portfolio() {
                     </svg>
                   ), 
                   color: "hover:text-green-500",
-                  link: "https://wa.link/690up4"
+                  link: "https://wa.me/94719604194"
                 },
               ].map((social, index) => (
                 <a
