@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Github, Folder, Lock, Globe, Facebook, Mail, Linkedin, MessageCircle, Clock, Home, User, Trophy, BookOpen, Pin, ArrowRight } from "lucide-react"
+import { Calendar, Github, Folder, Lock, Globe, Facebook, Mail, Linkedin, MessageCircle, Clock, Home, User, Trophy, BookOpen } from "lucide-react"
 import Sidebar from "@/components/sidebar"
 import PageLoader from "@/components/PageLoader"
 import GithubContribs from '@/components/GithubContribsClean'
@@ -8,16 +8,16 @@ import { Card } from "@/components/ui/card"
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { projects } from '@/lib/projects-data'
-import { allBlogs } from '@/lib/blogs-data'
-import Link from 'next/link'
+import { projects } from '@/lib/projects-data'
+
 import { useTheme } from 'next-themes'
 
 export default function ProjectsPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+
   const lastScrollYRef = useRef(0)
-  const [featuredScrollPosition, setFeaturedScrollPosition] = useState(0)
   const [showAllProjects, setShowAllProjects] = useState(false)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   
@@ -103,21 +103,7 @@ export default function ProjectsPage() {
     setCurrentIndex(Math.min(maxIndex, currentIndex + 1))
   }
 
-  const scrollFeatured = (direction: 'left' | 'right') => {
-    const container = document.getElementById('featured-container')
-    if (container) {
-      const scrollAmount = 340 // Card width + gap
-      const newPosition = direction === 'left' 
-        ? Math.max(0, featuredScrollPosition - scrollAmount)
-        : featuredScrollPosition + scrollAmount
-      
-      container.scrollTo({
-        left: newPosition,
-        behavior: 'smooth'
-      })
-      setFeaturedScrollPosition(newPosition)
-    }
-  }
+
   return (
     <>
       <PageLoader />
@@ -210,96 +196,7 @@ export default function ProjectsPage() {
             )}
           </section>
 
-          {/* Featured Projects */}
-          <div className="mb-6 rounded-2xl p-5 border border-gray-300 dark:border-white/10 shadow-lg relative bg-white dark:bg-[#212121]">
-            <h2 className="text-xl font-semibold mb-5 flex items-center !text-black dark:!text-white">
-              <Pin className="w-7 h-7 mr-3 !text-black dark:!text-white" />
-              Featured
-            </h2>
-            
-            {/* Left Arrow */}
-            {featuredScrollPosition > 0 && (
-              <button 
-                onClick={() => scrollFeatured('left')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black/70 hover:bg-black/90 dark:hover:bg-black/95 backdrop-blur-sm rounded-full flex items-center justify-center group transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                <svg 
-                  className="w-6 h-6 text-white dark:text-white text-gray-900 group-hover:text-blue-400 transition-colors duration-200" 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                </svg>
-              </button>
-            )}
 
-            {/* Right Arrow */}
-            <button 
-              onClick={() => scrollFeatured('right')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-black/70 hover:bg-black/90 dark:hover:bg-black/95 backdrop-blur-sm rounded-full flex items-center justify-center group transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              <svg 
-                className="w-6 h-6 text-white dark:text-white text-gray-900 group-hover:text-blue-400 transition-colors duration-200" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-              </svg>
-            </button>
-            <div id="featured-container" className="flex gap-4 overflow-hidden">
-              {allBlogs.map((blog, index) => (
-                <Link key={blog.id} href={`/blogs/${blog.slug}`}>
-                <Card
-                  key={index}
-                  className="relative bg-[#F5F5F5] dark:bg-[#262626] overflow-hidden group border border-gray-300 dark:border-white/10 shadow-lg flex-shrink-0 p-0"
-                  style={{
-                    width: '280px',
-                    height: '295px',
-                    borderRadius: '16px'
-                  }}
-                >
-                  <div className="h-48 relative overflow-hidden cursor-pointer group/image" style={{borderRadius: '16px 16px 0 0'}}>
-                    <img
-                      src={blog.image || "/placeholder.svg"}
-                      alt={blog.title}
-                      className="absolute inset-0 w-full h-full object-cover will-change-transform"
-                      style={{
-                        borderRadius: '16px 16px 0 0',
-                        transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.08)';
-                        e.currentTarget.style.filter = 'brightness(1.1)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                        e.currentTarget.style.filter = 'brightness(1)';
-                      }}
-                    />
-                  </div>
-                  <div className="p-2 pt-1">
-                    <h3 
-                      className="mb-1 line-clamp-2 leading-snug !text-black dark:!text-white"
-                      style={{
-                        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-                        fontSize: '16px',
-                        fontWeight: '600',
-                      }}
-                    >
-                      {blog.title}
-                    </h3>
-                    <div className="flex items-center text-xs !text-black dark:!text-gray-300 time-text">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/5 mr-2">
-                        <Clock className="w-3 h-3 !text-black dark:!text-white/80" />
-                      </span>
-                      <span className="time-text">{blog.date}</span>
-                    </div>
-                  </div>
-                </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
 
           {/* Get in Touch Section */}
           <section className="bg-white dark:bg-[#212121] rounded-2xl p-6 border border-gray-300 dark:border-white/6 shadow-lg mt-6">
@@ -609,68 +506,7 @@ export default function ProjectsPage() {
             )}
           </div>
 
-          {/* Mobile Featured Section */}
-          <div className="mb-6 rounded-none p-5 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-6 bg-white dark:bg-[#212121]">
-            <h2 className="text-xl font-semibold mb-4 flex items-center !text-black dark:!text-white about-heading">
-              <Pin className="w-6 h-6 mr-3 !text-black dark:!text-white" />
-              Featured
-            </h2>
-            <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-              {allBlogs.map((blog, index) => (
-                <Link key={blog.id} href={`/blogs/${blog.slug}`}>
-                  <Card
-                    className="relative bg-[#F5F5F5] dark:bg-[#262626] overflow-hidden group border border-gray-300 dark:border-white/10 shadow-lg flex-shrink-0 p-0 cursor-pointer hover:scale-105 transition-transform"
-                    style={{
-                      width: '320px',
-                      height: '337.011px',
-                      borderRadius: '16px'
-                    }}
-                  >
-                    <div className="h-56 relative overflow-hidden cursor-pointer group/image" style={{borderRadius: '16px 16px 0 0'}}>
-                      <img
-                        src={blog.image || "/placeholder.svg"}
-                        alt={blog.title}
-                        className="absolute inset-0 w-full h-full object-cover will-change-transform"
-                        style={{
-                          borderRadius: '16px 16px 0 0',
-                          transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'scale(1.08)';
-                          e.currentTarget.style.filter = 'brightness(1.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'scale(1)';
-                          e.currentTarget.style.filter = 'brightness(1)';
-                        }}
-                      />
-                      <button className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 w-10 h-10 rounded-full bg-black/60 backdrop-blur flex items-center justify-center border border-white/20">
-                        <ArrowRight className="w-5 h-5 !text-white dark:!text-white" />
-                      </button>
-                    </div>
-                    <div className="p-2 pt-1">
-                      <h3 
-                        className="mb-1 line-clamp-2 leading-snug !text-black dark:!text-white"
-                        style={{
-                          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-                          fontSize: '16px',
-                          fontWeight: '600',
-                        }}
-                      >
-                        {blog.title}
-                      </h3>
-                      <div className="flex items-center text-xs !text-black dark:!text-gray-300 time-text">
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/5 mr-2">
-                          <Clock className="w-3 h-3 !text-black dark:!text-white/80" />
-                        </span>
-                        <span className="time-text">{blog.date}</span>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
+
 
           {/* Get in Touch Section */}
           <div className="rounded-none p-6 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-4 bg-white dark:bg-[#212121]">
