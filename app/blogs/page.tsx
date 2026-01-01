@@ -1,8 +1,9 @@
 "use client"
 
-import { Clock, Pencil, ChevronLeft, ChevronRight, Facebook, Mail, Github, Linkedin, MessageCircle, Home, User, Trophy, FolderOpen, BookOpen } from "lucide-react"
+import { Clock, Pencil, ChevronLeft, ChevronRight, Facebook, Mail, Github, Linkedin, MessageCircle, Home, User, Trophy, FolderOpen, BookOpen, Lock } from "lucide-react"
 import Sidebar from "@/components/sidebar"
 import PageLoader from "@/components/PageLoader"
+import { Button } from "@/components/ui/button"
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -66,9 +67,17 @@ export default function BlogsPage() {
                 borderRadius: '12px'
               }}
             >
-              <div className="flex items-center gap-2 mb-6">
-                <Pencil className="w-6 h-6" />
-                <h2 className="text-xl font-bold !text-black dark:!text-white">Blogs</h2>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <Pencil className="w-6 h-6" />
+                  <h2 className="text-xl font-bold !text-black dark:!text-white">Blogs</h2>
+                </div>
+                <Link href="/blogs/private">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Lock className="w-4 h-4" />
+                    Private Blog
+                  </Button>
+                </Link>
               </div>
 
               <div className="mb-6">
@@ -327,9 +336,17 @@ export default function BlogsPage() {
         <div className="lg:hidden space-y-4">
           {/* Mobile Blogs Section */}
           <div className="rounded-none p-6 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg bg-white dark:bg-[#212121]">
-            <div className="flex items-center gap-3 mb-4">
-              <Pencil className="w-5 h-5 !text-black dark:!text-white" />
-              <h2 className="text-lg font-bold !text-black dark:!text-white">Blogs</h2>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Pencil className="w-5 h-5 !text-black dark:!text-white" />
+                <h2 className="text-lg font-bold !text-black dark:!text-white">Blogs</h2>
+              </div>
+              <Link href="/blogs/private">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <Lock className="w-4 h-4" />
+                  Private
+                </Button>
+              </Link>
             </div>
 
             {/* Featured Blog (Large) */}
