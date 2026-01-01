@@ -1,0 +1,1376 @@
+"use client"
+
+import { useEffect, useState, useRef } from "react"
+import Image from "next/image"
+import { Calendar, ExternalLink, Trophy, GraduationCap, Facebook, Mail, Github, Linkedin, MessageCircle, Home, User, FolderOpen, BookOpen } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Sidebar from "@/components/sidebar"
+import PageLoader from "@/components/PageLoader"
+import { usePathname } from "next/navigation"
+import { useTheme } from 'next-themes'
+
+export default function AchievementsPage() {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const lastScrollYRef = useRef(0)
+  const [showAllCourses, setShowAllCourses] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const pathname = usePathname()
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  
+  const initialCoursesCount = 8
+  const displayedCourses = showAllCourses ? 17 : initialCoursesCount
+
+  const handleLoadMore = () => {
+    setIsLoadingMore(true)
+    setTimeout(() => {
+      setShowAllCourses(true)
+      setIsLoadingMore(false)
+    }, 1000) // 1 second loading delay
+  }
+
+  // Scroll detection for mobile header
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      const lastScrollY = lastScrollYRef.current
+      
+      if (currentScrollY < 10) {
+        // At the top, always show header
+        setIsHeaderVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px, hide header
+        setIsHeaderVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up, show header
+        setIsHeaderVisible(true)
+      }
+      
+      lastScrollYRef.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <>
+      <PageLoader />
+  <div className="min-h-screen !text-black dark:!text-white about-text bg-[#DFEFF5] dark:bg-[#2C2C2C]">
+    {/* Desktop Layout */}
+    <div className="hidden lg:flex gap-6 p-6">
+  <Sidebar />
+
+  <div className="flex-1 overflow-y-auto ml-0 md:ml-68">
+        <div className="rounded-2xl p-6 border border-gray-300 dark:border-white/6 shadow-2xl bg-white dark:bg-[#212121]">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <Trophy className="w-6 h-6 !text-black dark:!text-white" />
+              <h2 className="text-2xl font-bold !text-black dark:!text-white">Licenses & Certifications</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-6">
+            <div className="rounded-2xl bg-[#F5F5F5] dark:bg-[#212121] p-1 group" style={{ width: '280px' }}>
+              <div className="relative rounded-2xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/6 mb-2" style={{ width: '280px', height: '176.787px' }}>
+                 <img 
+                   src="/Career Essentials in Cybersecurity by Microsoft and LinkedIn.webp" 
+                   alt="Cybersecurity Certificate" 
+                   className="w-full h-full object-cover bg-[#ffffff] rounded-xl will-change-transform" 
+                   style={{ 
+                     transform: 'scaleX(0.92)', 
+                     transformOrigin: 'center',
+                     transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                   }}
+                   onMouseEnter={(e) => {
+                     e.currentTarget.style.transform = 'scaleX(0.92) scale(1.08)';
+                     e.currentTarget.style.filter = 'brightness(1.1)';
+                   }}
+                   onMouseLeave={(e) => {
+                     e.currentTarget.style.transform = 'scaleX(0.92) scale(1)';
+                     e.currentTarget.style.filter = 'brightness(1)';
+                   }}
+                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors">
+                   <a
+                     href="https://www.linkedin.com/learning/certificates/4482e3e3138ad01bf8374566728e4ff00c8ce6833faf33e710903ad5482faca9?trk=share_certificate"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                    className="absolute left-4 bottom-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-md text-sm flex items-center gap-2 shadow-md whitespace-nowrap"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Show credential</span>
+                   </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h11v11H0V0zm12 0h11v11H12V0zM0 12h11v11H0V12zm12 0h11v11H12V12z" fill="#F25022"/>
+                    <path d="M12 0h11v11H12V0z" fill="#7FBA00"/>
+                    <path d="M0 12h11v11H0V12z" fill="#00A4EF"/>
+                    <path d="M12 12h11v11H12V12z" fill="#FFB900"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg !text-black dark:!text-white">Career Essentials in Cybersecurity</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Microsoft and LinkedIn</p>
+                  <div className="flex items-center text-sm mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-4 h-4 mr-2" /> Issued Aug 2024
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-[#F5F5F5] dark:bg-[#212121] p-1 group" style={{ width: '280px' }}>
+              <div className="relative rounded-2xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/6 mb-2" style={{ width: '280px', height: '176.787px' }}>
+                <img 
+                  src="/Career Essentials in GitHub Professional Certificate.webp" 
+                  alt="GitHub Certificate" 
+                  className="w-full h-full object-cover bg-[#ffffff] rounded-xl will-change-transform" 
+                  style={{ 
+                    transform: 'scaleX(0.92)', 
+                    transformOrigin: 'center',
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scaleX(0.92) scale(1.08)';
+                    e.currentTarget.style.filter = 'brightness(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scaleX(0.92) scale(1)';
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors">
+                  <a
+                    href="https://www.linkedin.com/learning/certificates/87afeb3eb58090ce672aafe572bc28561ff410cf69ba5b36f4f5f5dd9fba0dc8?trk=share_certificate"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute left-4 bottom-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-md text-sm flex items-center gap-2 shadow-md whitespace-nowrap"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Show credential</span>
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="#000"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg !text-black dark:!text-white">Career Essentials in GitHub</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">GitHub</p>
+                  <div className="flex items-center text-sm mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-4 h-4 mr-2" /> Issued Aug 2024
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-[#F5F5F5] dark:bg-[#212121] p-1 group" style={{ width: '280px' }}>
+              <div className="relative rounded-2xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/6 mb-2" style={{ width: '280px', height: '176.787px' }}>
+                <img 
+                  src="/Career Essentials in System Administration by Microsoft and LinkedIn.webp" 
+                  alt="System Administration Certificate" 
+                  className="w-full h-full object-cover bg-[#ffffff] rounded-xl will-change-transform" 
+                  style={{ 
+                    transform: 'scaleX(0.92)', 
+                    transformOrigin: 'center',
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scaleX(0.92) scale(1.08)';
+                    e.currentTarget.style.filter = 'brightness(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scaleX(0.92) scale(1)';
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors">
+                  <a
+                    href="https://www.linkedin.com/learning/certificates/1ad231bc19b715ba42f92cce77718776975c6d10fadcac5d6978e7ac1172f01c?trk=share_certificate"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute left-4 bottom-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-md text-sm flex items-center gap-2 shadow-md whitespace-nowrap"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Show credential</span>
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h11v11H0V0zm12 0h11v11H12V0zM0 12h11v11H0V12zm12 0h11v11H12V12z" fill="#F25022"/>
+                    <path d="M12 0h11v11H12V0z" fill="#7FBA00"/>
+                    <path d="M0 12h11v11H0V12z" fill="#00A4EF"/>
+                    <path d="M12 12h11v11H12V12z" fill="#FFB900"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg !text-black dark:!text-white">Career Essentials in System Administration</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Microsoft and LinkedIn</p>
+                  <div className="flex items-center text-sm mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-4 h-4 mr-2" /> Issued Aug 2024
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  <div className="rounded-2xl pl-1 pr-10 pt-6 pb-6 border border-gray-300 dark:border-white/6 shadow-2xl mb-6 mt-6 bg-white dark:bg-[#212121]">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <Trophy className="w-6 h-6 !text-black dark:!text-white" />
+              <h2 className="text-2xl font-bold !text-black dark:!text-white">Badges & Community</h2>
+                    </div>
+                </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-6">
+            {[
+              { 
+                title: 'Google Cloud Innovators Get Certified 2025', 
+                org: 'Google', 
+                issued: 'Sep 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud & NVIDIA community member', 
+                org: 'Google & NVIDIA', 
+                issued: 'Jul 2025', 
+                color: '#76B900',
+                logoUrl: '/nvidea.png?v=2'
+              },
+              { 
+                title: 'I/O 2025 - Registered', 
+                org: 'Google', 
+                issued: 'Apr 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Innovators Get Certified', 
+                org: 'Google', 
+                issued: 'Feb 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud Innovator', 
+                org: 'Google Cloud', 
+                issued: 'Jan 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud Skills Boost', 
+                org: 'Google Cloud', 
+                issued: 'Jan 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Android Studio User', 
+                org: 'Google', 
+                issued: 'Sep 2024', 
+                color: '#3DDC84',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Joined the Google Developer Program', 
+                org: 'Google', 
+                issued: 'Jun 2024', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+            ].map((badge, i) => (
+              <div key={i} className="rounded-2xl bg-[#F5F5F5] dark:bg-[#212121] p-4 border border-gray-300 dark:border-white/6 hover:border-gray-400 dark:hover:border-white/20 transition-all duration-300" style={{ width: '280px' }}>
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 rounded-md flex items-center justify-center p-2 overflow-hidden bg-white">
+                    <Image 
+                      src={badge.logoUrl} 
+                      alt={badge.org} 
+                      width={48} 
+                      height={48} 
+                      className="w-full h-full object-contain"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-base !text-black dark:!text-white mb-1 leading-tight">{badge.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{badge.org}</p>
+                    <div className="flex items-center text-sm" style={{ color: '#999999' }}>
+                      <Calendar className="w-4 h-4 mr-2" /> Issued {badge.issued}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+  <div className="rounded-2xl pl-1 pr-10 pt-6 pb-6 border border-gray-300 dark:border-white/6 shadow-2xl mb-6 mt-6 bg-white dark:bg-[#212121]">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <GraduationCap className="w-6 h-6 !text-black dark:!text-white" />
+              <h2 className="text-2xl font-bold !text-black dark:!text-white">Education</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {[
+              {
+                title: "Career Essentials in System Administration",
+                provider: "Microsoft and LinkedIn",
+                duration: "5h 5m",
+                completed: "Aug 2024",
+                instructor: "Robert McMillen"
+              },
+              {
+                title: "Introduction to Career Skills in Software Development",
+                provider: "LinkedIn",
+                duration: "2h 2m",
+                completed: "Aug 2024",
+                instructor: "Annyce Davis"
+              },
+              {
+                title: "Career Essentials in Cybersecurity",
+                provider: "Microsoft and LinkedIn",
+                duration: "6h 8m",
+                completed: "Aug 2024",
+                instructor: "Microsoft and LinkedIn"
+              },
+              {
+                title: "Microsoft Security Copilot (2024)",
+                provider: "LinkedIn",
+                duration: "44m",
+                completed: "Aug 2024",
+                instructor: "Bryan Li"
+              },
+              {
+                title: "Cybersecurity Foundations",
+                provider: "LinkedIn",
+                duration: "3h 31m",
+                completed: "Aug 2024",
+                instructor: "Malcolm Shore"
+              },
+              {
+                title: "Cybersecurity Awareness: Cybersecurity Terminology",
+                provider: "LinkedIn",
+                duration: "48m",
+                completed: "Aug 2024",
+                instructor: "Lauren Zink"
+              },
+              {
+                title: "The Cybersecurity Threat Landscape",
+                provider: "LinkedIn",
+                duration: "1h 7m",
+                completed: "Aug 2024",
+                instructor: "Marc Menninger"
+              },
+              {
+                title: "Career Essentials in GitHub Professional Certificate",
+                provider: "GitHub and LinkedIn",
+                duration: "4h 18m",
+                completed: "Aug 2024",
+                instructor: "GitHub and LinkedIn"
+              },
+              {
+                title: "Practical GitHub Actions",
+                provider: "LinkedIn",
+                duration: "1h 19m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Copilot",
+                provider: "LinkedIn",
+                duration: "1h",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Code Search",
+                provider: "LinkedIn",
+                duration: "40m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Project Management and Collaboration",
+                provider: "LinkedIn",
+                duration: "1h 18m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Computer Science Principles: Digital Information",
+                provider: "LinkedIn",
+                duration: "1h 10m",
+                completed: "Jul 2024",
+                instructor: "Rich Winnie"
+              },
+              {
+                title: "Microsoft 365 Fundamentals (MS-900) Cert Prep: 4 Pricing and Support",
+                provider: "Microsoft Press",
+                duration: "21m",
+                completed: "Jul 2024",
+                instructor: "Microsoft Press and Andrew Warren"
+              },
+              {
+                title: "Cybersecurity at Work",
+                provider: "LinkedIn",
+                duration: "1h 15m",
+                completed: "Jul 2024",
+                instructor: "Caroline Wong"
+              },
+              {
+                title: "CompTIA Cybersecurity Analyst+ (CySA+) (CS0-003) Cert Prep: 4 Reporting and Communication",
+                provider: "LinkedIn",
+                duration: "45m",
+                completed: "Jul 2024",
+                instructor: "Mike Chapple"
+              },
+              {
+                title: "Introduction to Career Skills in Data Analytics",
+                provider: "LinkedIn",
+                duration: "2h 21m",
+                completed: "Jun 2024",
+                instructor: "Robin Hunt"
+              }
+            ].filter((_, i) => showAllCourses || i < initialCoursesCount).map((course, i) => (
+              <div key={i} className="rounded-2xl bg-white dark:bg-[#212121] p-1 group" style={{ width: '280px' }}>
+                <div className="relative rounded-2xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/6 mb-2" style={{ width: '280px', height: '176.787px' }}>
+                  <img 
+                    src={
+                      i === 0 ? "/Career Essentials in System Administration by Microsoft and LinkedIn.webp" : 
+                      i === 1 ? "/Introduction to Career Skills in Software Development.png" : 
+                      i === 2 ? "/Career Essentials in Cybersecurity by Microsoft and LinkedIn.webp" :
+                      i === 3 ? "/Microsoft Security Copilot (2024).png" :
+                      i === 4 ? "/Cybersecurity Foundations.png" :
+                      i === 5 ? "/Cybersecurity Awareness Cybersecurity Terminology.png" :
+                      i === 6 ? "/The Cybersecurity Threat Landscape.png" :
+                      i === 7 ? "/Career Essentials in GitHub Professional Certificate.webp" :
+                      i === 8 ? "/Practical GitHub Actions.png" :
+                      i === 9 ? "/Practical GitHub Copilot.png" :
+                      i === 10 ? "/Practical GitHub Code Search.png" :
+                      i === 11 ? "/Practical GitHub Project Management and Collaboration.png" :
+                      i === 12 ? "/Computer Science Principles Digital Information.png" :
+                      i === 13 ? "/Microsoft 365 Fundamentals (MS-900) Cert Prep 4 Pricing and Support by Microsoft Press.png" :
+                      i === 14 ? "/Cybersecurity at Work.png" :
+                      i === 15 ? "/CompTIA Cybersecurity Analyst+ (CySA+) (CS0-003) Cert Prep 4 Reporting and Communication.png" :
+                      i === 16 ? "/Introduction to Career Skills in Data Analytics.png" :
+                      "/education1.png"
+                    } 
+                    alt={`cert-${i+1}`} 
+                    className="w-full h-full object-cover bg-[#ffffff] rounded-xl will-change-transform" 
+                    style={{ 
+                      transform: 'scaleX(0.92)', 
+                      transformOrigin: 'center',
+                      transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scaleX(0.92) scale(1.08)';
+                      e.currentTarget.style.filter = 'brightness(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scaleX(0.92) scale(1)';
+                      e.currentTarget.style.filter = 'brightness(1)';
+                    }}
+                  />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors">
+                      <a
+                        href={
+                          i === 0 ? "https://www.linkedin.com/learning/certificates/1ad231bc19b715ba42f92cce77718776975c6d10fadcac5d6978e7ac1172f01c?trk=share_certificate" : 
+                          i === 1 ? "https://www.linkedin.com/learning/certificates/acdaf800f2342a389fd49d075ccb77f126ff37a3d801ae572b5364b0be085fca?trk=share_certificate" : 
+                          i === 2 ? "https://www.linkedin.com/learning/certificates/4482e3e3138ad01bf8374566728e4ff00c8ce6833faf33e710903ad5482faca9?trk=share_certificate" :
+                          i === 3 ? "https://www.linkedin.com/learning/certificates/9835ac768698e30ef321a558d7915297be957ee234c04a51c6184513ffe04d7c?trk=share_certificate" :
+                          i === 4 ? "https://www.linkedin.com/learning/certificates/c5e0235bad5d073c684573219e036281b96d5db2a9236260b9d5d7e7f804d144?trk=share_certificate" :
+                          i === 5 ? "https://www.linkedin.com/learning/certificates/5ae3abc72813abc6690877290d8930ecec52366b7d9b2847543a32f0645188f4?trk=share_certificate" :
+                          i === 6 ? "https://www.linkedin.com/learning/certificates/77bc61dd756291641677b0660768074931cc5096ce38af833ff96e7255df121f?trk=share_certificate" :
+                          i === 7 ? "https://www.linkedin.com/learning/certificates/87afeb3eb58090ce672aafe572bc28561ff410cf69ba5b36f4f5f5dd9fba0dc8?trk=share_certificate" :
+                          i === 8 ? "https://www.linkedin.com/learning/certificates/f802bdaf28dfc17a89bf0b01092a335f3245f7ae17f4e8a21fc8d9bb8f706bf6?trk=share_certificate" :
+                          i === 9 ? "https://www.linkedin.com/learning/certificates/43c47d548ea6a9724096d1e30e0960eb5325a043652e3513f1fc5fac2331b711?trk=share_certificate" :
+                          i === 10 ? "https://www.linkedin.com/learning/certificates/c3663574893d69f15307737ae806cc5ed478aec27cacdae56838053cee19b393?trk=share_certificate" :
+                          i === 11 ? "https://www.linkedin.com/learning/certificates/320b913044646b125eafc9dbe68ebc5f8f5cf0913e739dd30fa4923e269e4d96?trk=share_certificate" :
+                          i === 12 ? "https://www.linkedin.com/learning/certificates/13a70cd0b6698c9a38ea39abe4e09f2631f9d828b2e5152e87ef00749f9e5b4b?trk=share_certificate" :
+                          i === 13 ? "https://www.linkedin.com/learning/certificates/6f858ca8280bae2097145e70703be936fb5e38624304e875b40b1c6651462d2c?trk=share_certificate" :
+                          i === 14 ? "https://www.linkedin.com/learning/certificates/094b753ca0fe3b4befaf0fadd089ad1754f9012fe8bc2fc35e37a71bf1a83e3d?trk=share_certificate" :
+                          i === 15 ? "https://www.linkedin.com/learning/certificates/8ee8af10a43aaf6bd2c462e35846a20d7133e86435475cf937af972c5c31d03a?trk=share_certificate" :
+                          i === 16 ? "https://www.linkedin.com/learning/certificates/ea522ffe8d4f81f1ded82e3937edff009068608e8ee6bf551aa1a328d2a8eea8?trk=share_certificate" :
+                          "#"
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute left-4 bottom-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-md text-sm flex items-center gap-2 shadow-md whitespace-nowrap"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>Show credential</span>
+                      </a>
+                    </div>
+                </div>
+
+                  <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center p-1">
+                    <img 
+                      src="/linkedinlearning.png" 
+                      alt="LinkedIn Learning" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg !text-black dark:!text-white">{course.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{course.provider}</p>
+                    <div className="flex items-center text-sm text-gray-400 mt-2">
+                      <Calendar className="w-4 h-4 mr-2" /> Completed {course.completed}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Show More Button */}
+          {!showAllCourses && 17 > initialCoursesCount && (
+            <div className="text-center">
+              <button 
+                onClick={handleLoadMore}
+                disabled={isLoadingMore}
+                className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors flex items-center gap-2 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoadingMore ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Loading...</span>
+                  </>
+                ) : (
+                  <>Load More ({17 - initialCoursesCount} more certifications)</>
+                )}
+              </button>
+            </div>
+          )}
+          {showAllCourses && (
+            <div className="text-center">
+              <button 
+                onClick={() => setShowAllCourses(false)}
+                className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+              >
+                Show Less
+              </button>
+            </div>
+          )}
+        </div>
+
+  <div className="mt-6 rounded-2xl p-6 border border-gray-300 dark:border-white/10 shadow-lg bg-white dark:bg-[#212121]">
+          <h3 className="text-lg font-semibold mb-4 flex items-center !text-black dark:!text-white">
+            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 mr-2 !text-black dark:!text-white">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Get in touch
+          </h3>
+          <div className="flex gap-2 mb-4">
+            {[
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="w-6 h-6">
+                    <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/>
+                  </svg>
+                ), 
+                color: "hover:text-blue-500",
+                link: "https://www.facebook.com/rajintha.vehan"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="w-6 h-6">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                ), 
+                color: "hover:text-red-500",
+                link: "mailto:vehanrajintha17@gmail.com"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 496 512" className="w-6 h-6">
+                    <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+                  </svg>
+                ), 
+                color: "hover:text-gray-300",
+                link: "https://github.com/VehanRajintha"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="w-6 h-6">
+                    <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                  </svg>
+                ), 
+                color: "hover:text-blue-400",
+                link: "https://www.linkedin.com/in/vehanrajintha/"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="w-6 h-6">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                  </svg>
+                ), 
+                color: "hover:text-green-500",
+                link: "https://wa.link/690up4"
+              },
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-white/10 transition-colors"
+              >
+                <div className="text-black dark:text-white">
+                  {social.icon}
+                </div>
+              </a>
+            ))}
+          </div>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Let's build something great together â€” feel free to connect with me through any of the platforms above.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Layout */}
+    <div className="lg:hidden min-h-screen">
+      {/* Mobile Header */}
+      <div 
+        className="sticky top-0 z-40 border-b border-gray-300 dark:border-white/10 backdrop-blur-sm bg-[#DFEFF5] dark:bg-[#212121]"
+        style={{
+          transform: isHeaderVisible ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1)',
+          willChange: 'transform'
+        }}
+      >
+        <div className="flex items-center justify-between px-4 py-3">
+          <button 
+            onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+            className="w-8 h-8 flex flex-col items-center justify-center space-y-1.5 rounded-lg hover:bg-white/5 transition-colors"
+          >
+            <div className={`w-4 h-0.5 bg-black dark:bg-white transition-all duration-300 ${isMobileSidebarOpen ? 'rotate-45 translate-y-1' : ''}`}></div>
+            <div className={`w-4 h-0.5 bg-black dark:bg-white transition-all duration-300 ${isMobileSidebarOpen ? '-rotate-45 -translate-y-1' : ''}`}></div>
+          </button>
+          <div className="w-8 h-8 rounded-full border-2 border-black/20 dark:border-white/20 overflow-hidden ring-1 ring-black/10 dark:ring-white/10">
+            <img 
+              src="https://github.com/VehanRajintha.png" 
+              alt="Profile" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {isMobileSidebarOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm"
+          style={{
+            animation: 'fadeIn 0.3s ease-out'
+          }}
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+      
+      {/* Mobile Sidebar */}
+      <div 
+        className="fixed left-0 top-0 h-full w-72 z-50 bg-[#DFEFF5] dark:bg-[#212121] shadow-2xl"
+        style={{
+          transform: isMobileSidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
+          transition: 'transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)',
+          willChange: 'transform'
+        }}
+      >
+        <div 
+          className="w-full h-full p-4 flex flex-col border-r border-gray-300 dark:border-white/10"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Mobile Sidebar Content */}
+          <div className="flex flex-col items-start mb-5 pl-2">
+              <div className="w-28 h-28 mb-4 rounded-full overflow-hidden">
+                <img src="https://github.com/VehanRajintha.png" alt="Vehan Rajintha" className="w-full h-full object-cover" />
+              </div>
+              <h2 className="text-xl font-semibold !text-black dark:!text-white">Vehan Rajintha</h2>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Full-Stack Developer</p>
+            </div>
+
+            {/* Resume Button */}
+            <div className="mb-4 flex justify-center">
+              <a
+                href="/resume"
+                className="flex items-center justify-center rounded-lg transition-colors w-full h-9 bg-gray-200 hover:bg-gray-300 dark:bg-[#141414] dark:hover:bg-[#2A2A2A] text-gray-800 dark:text-[#D9D9D9] border border-gray-300 dark:border-white/40"
+                style={{
+                  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+                  fontSize: '14.4px',
+                  fontWeight: '400',
+                  borderRadius: '8px'
+                }}
+              >
+                <svg className="mr-1.5" style={{width: '14.4px', height: '14.4px'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Resume
+              </a>
+            </div>
+
+            {/* Navigation */}
+            <nav className="flex-1 overflow-auto mb-4">
+              <ul className="space-y-2">
+                {[
+                  { id: "home", icon: Home, label: "Home", href: "/" },
+                  { id: "about", icon: User, label: "About", href: "/about" },
+                  { id: "achievements", icon: Trophy, label: "Achievements", href: "/achievements" },
+                  { id: "projects", icon: FolderOpen, label: "Projects", href: "/projects" },
+                  { id: "blogs", icon: BookOpen, label: "Blogs", href: "/blogs" },
+                ].map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={item.href}
+                      className={`w-full flex items-center px-4 py-2 rounded-xl text-left transition-colors ${
+                        pathname === item.href ? "text-[#5EA0FF]" : "text-white dark:text-white text-gray-900 hover:text-[#5EA0FF]"
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5 mr-3" />
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Dark Mode Toggle */}
+            <div className="mt-4 mb-4">
+              <button
+                data-theme-toggle
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="w-full bg-gray-200 dark:bg-[#2A2A2A] border border-gray-300 dark:border-white/8 rounded-xl px-4 py-3 flex items-center justify-between shadow-inner transition-colors hover:bg-gray-300 dark:hover:bg-[#333333]"
+              >
+                <div className="flex items-center gap-3 text-gray-800 dark:text-white">
+                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-300 dark:bg-black/30 border border-gray-400 dark:border-white/10">
+                    {mounted && theme === 'dark' ? (
+                      <svg className="w-4 h-4 text-gray-800 dark:text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4 text-gray-800 dark:text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    )}
+                  </span>
+                  <span className="text-base text-gray-800 dark:text-white">
+                    {mounted && theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                  </span>
+                </div>
+                <div className={`w-12 h-6 rounded-full relative transition-colors ${
+                  mounted && theme === 'dark' ? 'bg-[#5EA0FF]' : 'bg-gray-400'
+                }`}>
+                  <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all duration-300 ${
+                    mounted && theme === 'dark' ? 'right-0.5' : 'left-0.5'
+                  }`}></div>
+                </div>
+              </button>
+            </div>
+
+          {/* Footer */}
+          <div className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed mt-2">
+            <p>Designed & Built by Vehan Rajintha</p>
+            <p>© 2025, All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Content */}
+      <div className="px-4 space-y-4">
+        {/* Licenses & Certifications Section */}
+        <div className="rounded-none p-4 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-4 bg-white dark:bg-[#212121]">
+          <div className="flex items-center gap-3 mb-4 px-4">
+            <Trophy className="w-5 h-5 text-white dark:text-white text-gray-900/90" />
+            <h2 className="text-lg font-bold !text-black dark:!text-white">Licenses & Certifications</h2>
+          </div>
+
+          <div className="space-y-4 px-4">
+            <div className="space-y-3">
+                <div className="relative rounded-xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/10 group">
+                <img 
+                  src="/Career Essentials in Cybersecurity by Microsoft and LinkedIn.webp" 
+                  alt="Cybersecurity Certificate" 
+                  className="w-full h-auto object-cover will-change-transform" 
+                  style={{
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.08)';
+                    e.currentTarget.style.filter = 'brightness(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
+                />
+                  <a
+                    href="https://www.linkedin.com/learning/certificates/4482e3e3138ad01bf8374566728e4ff00c8ce6833faf33e710903ad5482faca9?trk=share_certificate"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-3 left-3 bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    <span>Show credential</span>
+                  </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h11v11H0V0zm12 0h11v11H12V0zM0 12h11v11H0V12zm12 0h11v11H12V12z" fill="#F25022"/>
+                    <path d="M12 0h11v11H12V0z" fill="#7FBA00"/>
+                    <path d="M0 12h11v11H0V12z" fill="#00A4EF"/>
+                    <path d="M12 12h11v11H12V12z" fill="#FFB900"/>
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold !text-black dark:!text-white text-sm leading-tight">Career Essentials in Cybersecurity</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Microsoft and LinkedIn</p>
+                  <div className="flex items-center text-xs mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-3 h-3 mr-1" />
+                    <span>Issued Aug 2024</span>
+                  </div>
+                </div>
+              </div>
+                </div>
+                
+            <div className="space-y-3">
+              <div className="relative rounded-xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/10 group">
+                <img 
+                  src="/Career Essentials in GitHub Professional Certificate.webp" 
+                  alt="GitHub Certificate" 
+                  className="w-full h-auto object-cover will-change-transform" 
+                  style={{
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.08)';
+                    e.currentTarget.style.filter = 'brightness(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
+                />
+                <a
+                  href="https://www.linkedin.com/learning/certificates/87afeb3eb58090ce672aafe572bc28561ff410cf69ba5b36f4f5f5dd9fba0dc8?trk=share_certificate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 left-3 bg-black/70 text-white dark:text-white text-gray-900 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  <span>Show credential</span>
+                </a>
+              </div>
+                <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="#000"/>
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold !text-black dark:!text-white text-sm leading-tight">Career Essentials in GitHub</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">GitHub</p>
+                  <div className="flex items-center text-xs mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-3 h-3 mr-1" />
+                    <span>Issued Aug 2024</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="relative rounded-xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/10 group">
+                <img 
+                  src="/Career Essentials in System Administration by Microsoft and LinkedIn.webp" 
+                  alt="System Administration Certificate" 
+                  className="w-full h-auto object-cover will-change-transform" 
+                  style={{
+                    transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.08)';
+                    e.currentTarget.style.filter = 'brightness(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
+                />
+                <a
+                  href="https://www.linkedin.com/learning/certificates/1ad231bc19b715ba42f92cce77718776975c6d10fadcac5d6978e7ac1172f01c?trk=share_certificate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 left-3 bg-black/70 text-white dark:text-white text-gray-900 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  <span>Show credential</span>
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-1.5">
+                  <svg viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h11v11H0V0zm12 0h11v11H12V0zM0 12h11v11H0V12zm12 0h11v11H12V12z" fill="#F25022"/>
+                    <path d="M12 0h11v11H12V0z" fill="#7FBA00"/>
+                    <path d="M0 12h11v11H0V12z" fill="#00A4EF"/>
+                    <path d="M12 12h11v11H12V12z" fill="#FFB900"/>
+                  </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold !text-black dark:!text-white text-sm leading-tight">Career Essentials in System Administration</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Microsoft and LinkedIn</p>
+                    <div className="flex items-center text-xs text-gray-400 mt-2">
+                      <Calendar className="w-3 h-3 mr-1" />
+                    <span>Issued Aug 2024</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Badges & Community Section */}
+        <div className="rounded-none p-4 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-4 bg-white dark:bg-[#212121]">
+          <div className="flex items-center gap-3 mb-4 px-4">
+            <Trophy className="w-5 h-5 text-white dark:text-white text-gray-900/90" />
+            <h2 className="text-lg font-bold !text-black dark:!text-white">Badges & Community</h2>
+          </div>
+
+          <div className="space-y-4 px-4">
+            {[
+              { 
+                title: 'Google Cloud Innovators Get Certified 2025', 
+                org: 'Google', 
+                issued: 'Sep 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud & NVIDIA community member', 
+                org: 'Google & NVIDIA', 
+                issued: 'Jul 2025', 
+                color: '#76B900',
+                logoUrl: '/nvidea.png?v=2'
+              },
+              { 
+                title: 'I/O 2025 - Registered', 
+                org: 'Google', 
+                issued: 'Apr 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Innovators Get Certified', 
+                org: 'Google', 
+                issued: 'Feb 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud Innovator', 
+                org: 'Google Cloud', 
+                issued: 'Jan 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Google Cloud Skills Boost', 
+                org: 'Google Cloud', 
+                issued: 'Jan 2025', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Android Studio User', 
+                org: 'Google', 
+                issued: 'Sep 2024', 
+                color: '#3DDC84',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+              { 
+                title: 'Joined the Google Developer Program', 
+                org: 'Google', 
+                issued: 'Jun 2024', 
+                color: '#4285F4',
+                logoUrl: '/googlecloud.png?v=2'
+              },
+            ].map((badge, i) => (
+              <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-white/6 hover:border-white/20 transition-all duration-300">
+                <div className="w-12 h-12 rounded-md flex items-center justify-center p-2 overflow-hidden bg-white">
+                  <Image 
+                    src={badge.logoUrl} 
+                    alt={badge.org} 
+                    width={48} 
+                    height={48} 
+                    className="w-full h-full object-contain"
+                    unoptimized
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold !text-black dark:!text-white text-sm leading-tight">{badge.title}</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{badge.org}</p>
+                  <div className="flex items-center text-xs mt-2" style={{ color: '#999999' }}>
+                    <Calendar className="w-3 h-3 mr-1" />
+                    <span>Issued {badge.issued}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Education Section */}
+        <div className="rounded-none p-4 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-4 bg-white dark:bg-[#212121]">
+          <div className="flex items-center gap-3 mb-4 px-4">
+            <GraduationCap className="w-5 h-5 text-white dark:text-white text-gray-900/90" />
+            <h2 className="text-lg font-bold !text-black dark:!text-white">Education</h2>
+          </div>
+
+          <div className="space-y-4 px-4">
+            {[
+              {
+                title: "Career Essentials in System Administration",
+                provider: "Microsoft and LinkedIn",
+                duration: "5h 5m",
+                completed: "Aug 2024",
+                instructor: "Robert McMillen"
+              },
+              {
+                title: "Introduction to Career Skills in Software Development",
+                provider: "LinkedIn",
+                duration: "2h 2m",
+                completed: "Aug 2024",
+                instructor: "Annyce Davis"
+              },
+              {
+                title: "Career Essentials in Cybersecurity",
+                provider: "Microsoft and LinkedIn",
+                duration: "6h 8m",
+                completed: "Aug 2024",
+                instructor: "Microsoft and LinkedIn"
+              },
+              {
+                title: "Microsoft Security Copilot (2024)",
+                provider: "LinkedIn",
+                duration: "44m",
+                completed: "Aug 2024",
+                instructor: "Bryan Li"
+              },
+              {
+                title: "Cybersecurity Foundations",
+                provider: "LinkedIn",
+                duration: "3h 31m",
+                completed: "Aug 2024",
+                instructor: "Malcolm Shore"
+              },
+              {
+                title: "Cybersecurity Awareness: Cybersecurity Terminology",
+                provider: "LinkedIn",
+                duration: "48m",
+                completed: "Aug 2024",
+                instructor: "Lauren Zink"
+              },
+              {
+                title: "The Cybersecurity Threat Landscape",
+                provider: "LinkedIn",
+                duration: "1h 7m",
+                completed: "Aug 2024",
+                instructor: "Marc Menninger"
+              },
+              {
+                title: "Career Essentials in GitHub Professional Certificate",
+                provider: "GitHub and LinkedIn",
+                duration: "4h 18m",
+                completed: "Aug 2024",
+                instructor: "GitHub and LinkedIn"
+              },
+              {
+                title: "Practical GitHub Actions",
+                provider: "LinkedIn",
+                duration: "1h 19m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Copilot",
+                provider: "LinkedIn",
+                duration: "1h",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Code Search",
+                provider: "LinkedIn",
+                duration: "40m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Practical GitHub Project Management and Collaboration",
+                provider: "LinkedIn",
+                duration: "1h 18m",
+                completed: "Aug 2024",
+                instructor: "Ray Villalobos"
+              },
+              {
+                title: "Computer Science Principles: Digital Information",
+                provider: "LinkedIn",
+                duration: "1h 10m",
+                completed: "Jul 2024",
+                instructor: "Rich Winnie"
+              },
+              {
+                title: "Microsoft 365 Fundamentals (MS-900) Cert Prep: 4 Pricing and Support",
+                provider: "Microsoft Press",
+                duration: "21m",
+                completed: "Jul 2024",
+                instructor: "Microsoft Press and Andrew Warren"
+              },
+              {
+                title: "Cybersecurity at Work",
+                provider: "LinkedIn",
+                duration: "1h 15m",
+                completed: "Jul 2024",
+                instructor: "Caroline Wong"
+              },
+              {
+                title: "CompTIA Cybersecurity Analyst+ (CySA+) (CS0-003) Cert Prep: 4 Reporting and Communication",
+                provider: "LinkedIn",
+                duration: "45m",
+                completed: "Jul 2024",
+                instructor: "Mike Chapple"
+              },
+              {
+                title: "Introduction to Career Skills in Data Analytics",
+                provider: "LinkedIn",
+                duration: "2h 21m",
+                completed: "Jun 2024",
+                instructor: "Robin Hunt"
+              }
+            ].filter((_, i) => showAllCourses || i < initialCoursesCount).map((course, i) => (
+              <div key={i} className="space-y-3">
+                {/* Certificate Image */}
+                <div className="relative rounded-xl overflow-hidden bg-[#F5F5F5] dark:bg-[#212121] border border-gray-300 dark:border-white/10 group">
+                  <img 
+                    src={
+                      i === 0 ? "/Career Essentials in System Administration by Microsoft and LinkedIn.webp" : 
+                      i === 1 ? "/Introduction to Career Skills in Software Development.png" : 
+                      i === 2 ? "/Career Essentials in Cybersecurity by Microsoft and LinkedIn.webp" :
+                      i === 3 ? "/Microsoft Security Copilot (2024).png" :
+                      i === 4 ? "/Cybersecurity Foundations.png" :
+                      i === 5 ? "/Cybersecurity Awareness Cybersecurity Terminology.png" :
+                      i === 6 ? "/The Cybersecurity Threat Landscape.png" :
+                      i === 7 ? "/Career Essentials in GitHub Professional Certificate.webp" :
+                      i === 8 ? "/Practical GitHub Actions.png" :
+                      i === 9 ? "/Practical GitHub Copilot.png" :
+                      i === 10 ? "/Practical GitHub Code Search.png" :
+                      i === 11 ? "/Practical GitHub Project Management and Collaboration.png" :
+                      i === 12 ? "/Computer Science Principles Digital Information.png" :
+                      i === 13 ? "/Microsoft 365 Fundamentals (MS-900) Cert Prep 4 Pricing and Support by Microsoft Press.png" :
+                      i === 14 ? "/Cybersecurity at Work.png" :
+                      i === 15 ? "/CompTIA Cybersecurity Analyst+ (CySA+) (CS0-003) Cert Prep 4 Reporting and Communication.png" :
+                      i === 16 ? "/Introduction to Career Skills in Data Analytics.png" :
+                      "/education1.png"
+                    } 
+                    alt={`education-${i+1}`} 
+                    className="w-full h-auto object-cover will-change-transform" 
+                    style={{
+                      transition: 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.08)';
+                      e.currentTarget.style.filter = 'brightness(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.filter = 'brightness(1)';
+                    }}
+                  />
+                  <a
+                    href={
+                      i === 0 ? "https://www.linkedin.com/learning/certificates/1ad231bc19b715ba42f92cce77718776975c6d10fadcac5d6978e7ac1172f01c?trk=share_certificate" : 
+                      i === 1 ? "https://www.linkedin.com/learning/certificates/acdaf800f2342a389fd49d075ccb77f126ff37a3d801ae572b5364b0be085fca?trk=share_certificate" : 
+                      i === 2 ? "https://www.linkedin.com/learning/certificates/4482e3e3138ad01bf8374566728e4ff00c8ce6833faf33e710903ad5482faca9?trk=share_certificate" :
+                      i === 3 ? "https://www.linkedin.com/learning/certificates/9835ac768698e30ef321a558d7915297be957ee234c04a51c6184513ffe04d7c?trk=share_certificate" :
+                      i === 4 ? "https://www.linkedin.com/learning/certificates/c5e0235bad5d073c684573219e036281b96d5db2a9236260b9d5d7e7f804d144?trk=share_certificate" :
+                      i === 5 ? "https://www.linkedin.com/learning/certificates/5ae3abc72813abc6690877290d8930ecec52366b7d9b2847543a32f0645188f4?trk=share_certificate" :
+                      i === 6 ? "https://www.linkedin.com/learning/certificates/77bc61dd756291641677b0660768074931cc5096ce38af833ff96e7255df121f?trk=share_certificate" :
+                      i === 7 ? "https://www.linkedin.com/learning/certificates/87afeb3eb58090ce672aafe572bc28561ff410cf69ba5b36f4f5f5dd9fba0dc8?trk=share_certificate" :
+                      i === 8 ? "https://www.linkedin.com/learning/certificates/f802bdaf28dfc17a89bf0b01092a335f3245f7ae17f4e8a21fc8d9bb8f706bf6?trk=share_certificate" :
+                      i === 9 ? "https://www.linkedin.com/learning/certificates/43c47d548ea6a9724096d1e30e0960eb5325a043652e3513f1fc5fac2331b711?trk=share_certificate" :
+                      i === 10 ? "https://www.linkedin.com/learning/certificates/c3663574893d69f15307737ae806cc5ed478aec27cacdae56838053cee19b393?trk=share_certificate" :
+                      i === 11 ? "https://www.linkedin.com/learning/certificates/320b913044646b125eafc9dbe68ebc5f8f5cf0913e739dd30fa4923e269e4d96?trk=share_certificate" :
+                      i === 12 ? "https://www.linkedin.com/learning/certificates/13a70cd0b6698c9a38ea39abe4e09f2631f9d828b2e5152e87ef00749f9e5b4b?trk=share_certificate" :
+                      i === 13 ? "https://www.linkedin.com/learning/certificates/6f858ca8280bae2097145e70703be936fb5e38624304e875b40b1c6651462d2c?trk=share_certificate" :
+                      i === 14 ? "https://www.linkedin.com/learning/certificates/094b753ca0fe3b4befaf0fadd089ad1754f9012fe8bc2fc35e37a71bf1a83e3d?trk=share_certificate" :
+                      i === 15 ? "https://www.linkedin.com/learning/certificates/8ee8af10a43aaf6bd2c462e35846a20d7133e86435475cf937af972c5c31d03a?trk=share_certificate" :
+                      i === 16 ? "https://www.linkedin.com/learning/certificates/ea522ffe8d4f81f1ded82e3937edff009068608e8ee6bf551aa1a328d2a8eea8?trk=share_certificate" :
+                      "#"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-3 left-3 bg-white/90 dark:bg-black/70 text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    <span>Show credential</span>
+                  </a>
+                </div>
+                
+                {/* Certificate Details */}
+                  <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center p-1">
+                    <img 
+                      src="/linkedinlearning.png" 
+                      alt="LinkedIn Learning" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-white dark:text-white text-gray-900 text-sm leading-tight">{course.title}</h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{course.provider}</p>
+                    <div className="flex items-center text-xs text-gray-400 mt-2">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      <span>Completed {course.completed}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Show More Button */}
+          {!showAllCourses && 17 > initialCoursesCount && (
+            <div className="text-center mt-4 px-4">
+              <button 
+                onClick={handleLoadMore}
+                disabled={isLoadingMore}
+                className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors flex items-center gap-2 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoadingMore ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Loading...</span>
+                  </>
+                ) : (
+                  <>Load More ({17 - initialCoursesCount} more certifications)</>
+                )}
+              </button>
+            </div>
+          )}
+          {showAllCourses && (
+            <div className="text-center mt-4 px-4">
+              <button 
+                onClick={() => setShowAllCourses(false)}
+                className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+              >
+                Show Less
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Get in Touch Section */}
+        <div className="rounded-none p-6 border-x-0 border-t border-b border-gray-300 dark:border-white/10 shadow-lg -mx-4 bg-white dark:bg-[#212121]">
+          <h3 className="text-lg font-semibold mb-4 flex items-center !text-black dark:!text-white">
+            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 mr-2 !text-black dark:!text-white">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Get in touch
+          </h3>
+          <div className="flex gap-2 mb-4">
+            {[
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="w-6 h-6">
+                    <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/>
+                  </svg>
+                ), 
+                color: "hover:text-blue-500",
+                link: "https://www.facebook.com/rajintha.vehan"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="w-6 h-6">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                ), 
+                color: "hover:text-red-500",
+                link: "mailto:vehanrajintha17@gmail.com"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 496 512" className="w-6 h-6">
+                    <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+                  </svg>
+                ), 
+                color: "hover:text-gray-300",
+                link: "https://github.com/VehanRajintha"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="w-6 h-6">
+                    <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                  </svg>
+                ), 
+                color: "hover:text-blue-400",
+                link: "https://www.linkedin.com/in/vehanrajintha/"
+              },
+              { 
+                icon: (
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" className="w-6 h-6">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                  </svg>
+                ), 
+                color: "hover:text-green-500",
+                link: "https://wa.link/690up4"
+              },
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-white/10 transition-colors"
+              >
+                <div className="text-black dark:text-white">
+                  {social.icon}
+                </div>
+              </a>
+            ))}
+          </div>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Let's build something great together â€” feel free to connect with me through any of the platforms above.
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>
+    </>
+  )
+}
