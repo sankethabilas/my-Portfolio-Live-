@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { projects } from '@/lib/projects-data'
-import { projects } from '@/lib/projects-data'
+
 
 import { useTheme } from 'next-themes'
 
