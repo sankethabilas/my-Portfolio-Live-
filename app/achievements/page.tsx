@@ -123,7 +123,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-blue-500",
-                link: "https://www.facebook.com/rajintha.vehan"
+                link: "https://web.facebook.com/sanketh.abilas.2025/"
               },
               { 
                 icon: (
@@ -132,7 +132,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-red-500",
-                link: "mailto:vehanrajintha17@gmail.com"
+                link: "mailto:sankethmarasingha@gmail.com"
               },
               { 
                 icon: (
@@ -141,7 +141,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-gray-300",
-                link: "https://github.com/VehanRajintha"
+                link: "https://github.com/sankethabilas"
               },
               { 
                 icon: (
@@ -150,7 +150,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-blue-400",
-                link: "https://www.linkedin.com/in/vehanrajintha/"
+                link: "https://www.linkedin.com/in/sanketh-abilas-567569322/"
               },
               { 
                 icon: (
@@ -159,7 +159,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-green-500",
-                link: "https://wa.link/690up4"
+                link: "https://wa.me/94719604194"
               },
             ].map((social, index) => (
               <a
@@ -843,7 +843,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-blue-500",
-                link: "https://www.facebook.com/rajintha.vehan"
+                link: "https://web.facebook.com/sanketh.abilas.2025/"
               },
               { 
                 icon: (
@@ -852,7 +852,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-red-500",
-                link: "mailto:vehanrajintha17@gmail.com"
+                link: "mailto:sankethmarasingha@gmail.com"
               },
               { 
                 icon: (
@@ -861,7 +861,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-gray-300",
-                link: "https://github.com/VehanRajintha"
+                link: "https://github.com/sankethabilas"
               },
               { 
                 icon: (
@@ -870,7 +870,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-blue-400",
-                link: "https://www.linkedin.com/in/vehanrajintha/"
+                link: "https://www.linkedin.com/in/sanketh-abilas-567569322/"
               },
               { 
                 icon: (
@@ -879,7 +879,7 @@ export default function AchievementsPage() {
                   </svg>
                 ), 
                 color: "hover:text-green-500",
-                link: "https://wa.link/690up4"
+                link: "https://wa.me/94719604194"
               },
             ].map((social, index) => (
               <a
