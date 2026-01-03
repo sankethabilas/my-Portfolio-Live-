@@ -552,10 +552,10 @@ export default function Portfolio() {
                 { 
                   id: "web-dev", 
                   label: "Web Development", 
-                  description: "I build modern web applications using React and full-stack JavaScript technologies. From responsive landing pages to scalable platforms, I focus on clean code, performance, and reliability to deliver applications that look great and work seamlessly.",
+                  description: "I build web apps from scratch using React – clean, responsive, and built to perform. Whether it's a landing page or a full-scale platform, I make sure it looks great and works even better.",
                   icon: (
                     <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <text x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="bold">&lt;&gt;</text>
+                      <text fill="white" x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="bold">&lt;&gt;</text>
                     </svg>
                   ), 
                   color: "bg-gradient-to-br from-[#E0BBE4] to-[#957DAD]" 
@@ -563,44 +563,44 @@ export default function Portfolio() {
                 { 
                   id: "graphic", 
                   label: "Graphic Design", 
-                  description: "I create clean, visually appealing designs that clearly communicate a brand’s identity. From logos and social media creatives to marketing materials, I combine creativity with consistency and professionalism.",
+                  description: "Creating visually stunning designs that communicate your brand's message effectively. From logos to marketing materials, I bring creativity and professionalism to every project.",
                   icon: (
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M3 21l9-9 9 9"/>
-                      <path d="M12 3v18"/>
-                      <path d="M3 12h18"/>
+                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <path stroke="white" d="M3 21l9-9 9 9"/>
+                      <path stroke="white" d="M12 3v18"/>
+                      <path stroke="white" d="M3 12h18"/>
                     </svg>
                   ), 
-                  color: "bg-gradient-to-br from-[#FFD1A0] to-[#FFA07A]"  
+                  color: "bg-gradient-to-br from-[#FFD1A0] to-[#FFA07A]" 
                 },
                 { 
                   id: "marketing", 
                   label: "Digital Marketing", 
-                  description: "I provide result-driven digital marketing solutions to improve online visibility and engagement. From SEO basics to social media strategy, I help businesses connect with the right audience and grow their digital presence.",
+                  description: "Strategic digital marketing solutions that drive growth and engagement. From SEO optimization to social media campaigns, I help businesses reach their target audience effectively.",
                   icon: (
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="11" cy="11" r="8"/>
-                      <path d="m21 21-4.35-4.35"/>
+                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <circle stroke="white" cx="11" cy="11" r="8"/>
+                      <path stroke="white" d="m21 21-4.35-4.35"/>
                     </svg>
                   ), 
-                  color: "bg-gradient-to-br from-[#66D9EF] to-[#3498DB]"  
+                  color: "bg-gradient-to-br from-[#66D9EF] to-[#3498DB]" 
                 },
                 { 
                   id: "ui-ux", 
                   label: "UI / UX Design", 
-                  description: "I design user-centered interfaces that are intuitive, accessible, and visually balanced. My focus is on usability and smooth user journeys, ensuring every interaction feels simple, clear, and engaging.",
+                  description: "User-centered design that creates intuitive and engaging experiences. I focus on usability, accessibility, and visual appeal to deliver interfaces that users love to interact with.",
                   icon: (
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="6" cy="8" r="2"/>
-                      <circle cx="6" cy="16" r="2"/>
-                      <circle cx="18" cy="12" r="2"/>
-                      <circle cx="12" cy="20" r="2"/>
-                      <line x1="6" y1="8" x2="6" y2="16"/>
-                      <line x1="6" y1="8" x2="18" y2="12"/>
-                      <line x1="6" y1="8" x2="12" y2="20"/>
+                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <circle stroke="white" cx="6" cy="8" r="2"/>
+                      <circle stroke="white" cx="6" cy="16" r="2"/>
+                      <circle stroke="white" cx="18" cy="12" r="2"/>
+                      <circle stroke="white" cx="12" cy="20" r="2"/>
+                      <line stroke="white" x1="6" y1="8" x2="6" y2="16"/>
+                      <line stroke="white" x1="6" y1="8" x2="18" y2="12"/>
+                      <line stroke="white" x1="6" y1="8" x2="12" y2="20"/>
                     </svg>
                   ), 
-                  color: "bg-gradient-to-br from-[#4A90E2] to-[#6A5ACD]"  
+                  color: "bg-gradient-to-br from-[#4A90E2] to-[#6A5ACD]" 
                 },
               ].map((item) => (
                 <div
